@@ -2,21 +2,24 @@ $(document).ready(function () {
     $(".chosen").chosen();
     $("#region").on("change", "select", function () {
         var id = $(this).attr("id");
-        var value = $("#" + id + " option:selected").val();
-        var data = {
-            id: id,
-            val: value
-        };
-        $("#" + id).next().nextAll().remove();
-        $("#listmsg").text('');
-        $.post("/user/region", JSON.stringify(data)).done(function (data) {
-            if (data.length > 0) {
-                var newData = JSON.parse(data);
-                $('#region').append('<br>');
-                $('#region').append(newData.list);
-                $(".chosen").chosen();
-            }
-        });
+        if (id < 3) {
+            var value = $("#" + id + " option:selected").val();
+            var data = {
+                id: id,
+                val: value
+            };
+            $("#" + id).next().nextAll().remove();
+            $("#listmsg").text('');
+            $.post("/user/region", JSON.stringify(data)).done(function (data) {
+                if (data.length > 0) {
+                    var newData = JSON.parse(data);
+                    $('#region').append('<br>');
+                    $('#region').append(newData.list);
+                    $(".chosen").chosen();
+                }
+            });
+        }
+
     });
     $("#submit").on("click", function () {
         var ok = 0;

@@ -15,9 +15,10 @@ class Application {
      * "Start" the application:
      * Analyze the URL elements and calls the according controller/method or the fallback
      */
-    public function __construct() {        
-        set_exception_handler(array(get_class($this), "getStaticException"));
+    public function __construct() {
         session_start();
+        set_exception_handler(array(get_class($this), "getStaticException"));
+        
     }
     
     public function run() {        
